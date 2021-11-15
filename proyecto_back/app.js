@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
 // Codificación de base de datos
-var database = require("./config/database");
+var database = require('./config/database');
 var auth = require('./auth/main_auth')
 
 var turnosRouter = require('./routes/turnos.router');
@@ -18,22 +19,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 //mongoConnection
 database.mongoConnect();
-app.use("/usuarios", usuariosRouter);
+app.use('/usuarios', usuariosRouter);
 app.use(auth);
 
 // Router
 app.use('/turnos', turnosRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
