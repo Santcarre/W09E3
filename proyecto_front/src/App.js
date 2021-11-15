@@ -1,14 +1,15 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Container, Form } from 'react-bootstrap';
-import Login from './components/login/login';
+//import Login from './components/login/login';
+import TopMenu from './components/navbar/navbar';
+import AppRouter from './components/router/router';
 
 function App() {
   return (
     <div className="App">
-      <Container>
-        <Login />
-      </Container>
+      <TopMenu />
+      {/*<Login />*/}
+      <AppRouter />
     </div>
   );
 }

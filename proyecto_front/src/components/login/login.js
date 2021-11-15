@@ -1,18 +1,35 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
-import { Button, Form, Row, Col } from 'react-bootstrap';
+import { Container, Button, Form, Row, Col } from 'react-bootstrap';
+import { APIHOST as host } from '../../App.json';
+import './login.css';
+import axios from 'axios';
 
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       usuario: '',
-      pass: "",
+      pass: '',
     };
   }
+
+  iniciarSesion() {
+    axios.post(`${host}/usuarios/login`, {
+      usuario: this.state.usuario,
+      pass: this.state.pass,
+    })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    //alert(`usuario: ${this.state.usuario} - password: ${this.state.pass}`);
+  }
+
   render() {
     return (
-      <Container id="login-container" style={{ marginTop: 200 }}>
+      <Container id="login-container">
         <Row>
           <Col>
             <Row>
@@ -28,29 +45,26 @@ export default class Login extends React.Component {
               >
                 <Form>
                   <Form.Group>
-                    <Form.Label style={{ float: 'left' }}>Usuario</Form.Label>
+                    <Form.Label>Usuario</Form.Label>
                     <Form.Control
                       onChange={(e) =>
                         this.setState({ usuario: e.target.value })
                       }
                     />
-                    {this.state.usuario}
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label style={{ float: 'left' }}>
-                      Contraseña
-                    </Form.Label>
-                    <Form.Control type="password"
-                        onChange={(e)=>
-                            this.setState({pass: e.target.value})
-                        }
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control
+                      type="password"
+                      onChange={(e) => this.setState({ pass: e.target.value })}
                     />
-                    {this.state.pass}
                   </Form.Group>
                   <Button
-                    variant="success"
-                    style={{ marginTop: 20, width: '100%' }}
+                    variant="primary"
+                    onClick={() => {
+                      this.iniciarSesion();
+                    }}
                   >
                     Iniciar sesión
                   </Button>
