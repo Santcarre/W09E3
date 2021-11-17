@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import './navbar.css';
-import logo from "../img/logo.png";
+import logo from '../img/logo.png';
 
 export default class TopMenu extends React.Component {
   constructor(props) {
@@ -23,9 +23,15 @@ export default class TopMenu extends React.Component {
       <Navbar fixed="top" id="navbar" bg="primary" variant="dark">
         <Container>
           {/* <img className="logo" src={ logo } /> */}
-          <img className="logo" src="https://www.misiontic2022.gov.co/746/channels-642_misiontic_logo.png" />
+          <img
+            className="logo"
+            src="https://www.misiontic2022.gov.co/746/channels-642_misiontic_logo.png"
+          />
           <Navbar.Brand href="#home">
             Proyecto<span id="usuario-sub-branm"></span>
+          </Navbar.Brand>
+          <Navbar.Brand href="#home">
+            Counter<span id="usuario-sub-branm"></span>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic.navbar.nav ">
